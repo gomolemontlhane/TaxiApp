@@ -1,3 +1,7 @@
+## Screenshot
+
+![TaxiApp preview](screenshot.png)
+
 # TaxiApp
 
 A minimalist navigation web app for South African minibus taxis.
