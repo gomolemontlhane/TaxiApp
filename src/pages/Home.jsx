@@ -7,77 +7,14 @@ import {
 } from "lucide-react"
 
 import { taxiStops } from "../data/stops"
+import Map from "../components/map/MapView"
 
 function Home() {
   return (
     <main className="relative h-dvh w-full overflow-hidden bg-neutral-100 text-neutral-950">
 
       {/* MAP */}
-      <section className="absolute inset-0">
-
-        {/* Temporary map background */}
-        <div className="absolute inset-0 bg-[#e8e8e5]">
-
-          {/* Decorative map grid */}
-          <div
-            className="absolute inset-0 opacity-30"
-            style={{
-              backgroundImage: `
-                linear-gradient(#ffffff 1px, transparent 1px),
-                linear-gradient(90deg, #ffffff 1px, transparent 1px)
-              `,
-              backgroundSize: "80px 80px",
-            }}
-          />
-
-          {/* Decorative roads */}
-          <div className="absolute left-[15%] top-0 h-full w-px rotate-[18deg] bg-white/90" />
-          <div className="absolute left-[48%] top-0 h-full w-px -rotate-[12deg] bg-white/90" />
-          <div className="absolute left-0 top-[35%] h-px w-full rotate-[8deg] bg-white/90" />
-          <div className="absolute left-0 top-[65%] h-px w-full -rotate-[5deg] bg-white/90" />
-
-        </div>
-
-        {/* MAP LABEL */}
-        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-          <span className="text-[10px] font-medium uppercase tracking-[0.3em] text-neutral-400">
-            Johannesburg
-          </span>
-        </div>
-
-        {/* USER LOCATION */}
-        <button
-          className="absolute bottom-[32%] left-1/2 flex h-11 w-11 -translate-x-1/2 items-center justify-center rounded-full bg-white shadow-lg ring-1 ring-black/5"
-          aria-label="Your location"
-        >
-          <span className="absolute h-4 w-4 animate-ping rounded-full bg-black/20" />
-
-          <span className="relative h-3 w-3 rounded-full bg-neutral-950 ring-4 ring-white" />
-        </button>
-
-        {/* TAXI STOP MARKERS */}
-        <button
-          className="absolute left-[25%] top-[32%] flex h-8 w-8 items-center justify-center rounded-full bg-white text-sm shadow-md ring-1 ring-black/5"
-          aria-label="Taxi stop"
-        >
-          🚐
-        </button>
-
-        <button
-          className="absolute right-[22%] top-[42%] flex h-8 w-8 items-center justify-center rounded-full bg-white text-sm shadow-md ring-1 ring-black/5"
-          aria-label="Taxi stop"
-        >
-          🚐
-        </button>
-
-        <button
-          className="absolute left-[60%] top-[24%] flex h-8 w-8 items-center justify-center rounded-full bg-white text-sm shadow-md ring-1 ring-black/5"
-          aria-label="Taxi stop"
-        >
-          🚐
-        </button>
-
-      </section>
+      <Map />
 
       {/* TOP NAVIGATION */}
       <header className="absolute inset-x-0 top-0 z-20 p-4 sm:p-6">
