@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react"
 import mapboxgl from "mapbox-gl"
 import "mapbox-gl/dist/mapbox-gl.css"
+// import TaxiStopMarker from "./TaxiStopMarker"
 
 import { taxiStops } from "../../data/stops"
 
@@ -34,15 +35,11 @@ function Map() {
 
     map.current.on("load", () => {
       taxiStops.forEach((stop) => {
-        const marker = document.createElement("button")
+const marker = document.createElement("div")
 
-        marker.className =
-          "flex h-9 w-9 items-center justify-center rounded-full bg-white text-sm shadow-md ring-1 ring-black/5 transition-transform hover:scale-110"
+const markerRoot = document.createElement("div")
 
-        marker.innerHTML = "🚐"
-
-        marker.setAttribute("aria-label", stop.name)
-
+marker.appendChild(markerRoot)
         new mapboxgl.Marker({
           element: marker,
         })
