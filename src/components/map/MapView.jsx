@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import mapboxgl from "mapbox-gl"
 import "mapbox-gl/dist/mapbox-gl.css"
 // import TaxiStopMarker from "./TaxiStopMarker"
@@ -10,9 +10,10 @@ mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_TOKEN
 function Map() {
   const mapContainer = useRef(null)
   const map = useRef(null)
+  const [mapError, setMapError] = useState(false)
 
   useEffect(() => {
-    if (map.current) return
+    if (map.current || !mapboxgl.accessToken || !mapContainer.current) return
 
     map.current = new mapboxgl.Map({
       container: mapContainer.current,
@@ -33,6 +34,9 @@ function Map() {
       "bottom-right",
     )
 
+    const handleMapError = () => setMapError(true)
+    map.current.on("error", handleMapError)
+
     map.current.on("load", () => {
       taxiStops.forEach((stop) => {
 const marker = document.createElement("div")
@@ -52,6 +56,7 @@ marker.appendChild(markerRoot)
     })
 
     return () => {
+      map.current?.off("error", handleMapError)
       map.current?.remove()
       map.current = null
     }
@@ -60,8 +65,10 @@ marker.appendChild(markerRoot)
   return (
     <div
       ref={mapContainer}
-      className="absolute inset-0"
-    />
+      className="absolute inset-0 bg-neutral-200"
+    >
+      {mapError && <div className="absolute inset-0 bg-neutral-200" />}
+    </div>
   )
 }
 
