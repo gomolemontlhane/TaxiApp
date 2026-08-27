@@ -2,12 +2,13 @@ import {
   LocateFixed,
   Menu,
   Navigation,
-  Search,
-  SlidersHorizontal,
+  // Search,
+  // SlidersHorizontal,
 } from "lucide-react"
 
 import { taxiStops } from "../data/stops"
 import Map from "../components/map/MapView"
+import SearchBar from "../components/search/SearchBar"
 
 function Home() {
   return (
@@ -48,30 +49,7 @@ function Home() {
 
         <div className="mx-auto max-w-xl">
 
-          <button className="group flex w-full items-center gap-3 rounded-2xl bg-white px-4 py-4 text-left shadow-lg shadow-black/5 ring-1 ring-black/5 transition hover:shadow-xl">
-
-            <Search
-              size={19}
-              className="shrink-0 text-neutral-400 transition group-hover:text-neutral-950"
-            />
-
-            <div className="flex-1">
-              <p className="text-sm font-medium">
-                Where are you going?
-              </p>
-
-              <p className="mt-0.5 text-xs text-neutral-400">
-                Find the best taxi route
-              </p>
-            </div>
-
-            <SlidersHorizontal
-              size={17}
-              className="text-neutral-400"
-            />
-
-          </button>
-
+          <SearchBar />
         </div>
 
       </div>
