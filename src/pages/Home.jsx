@@ -10,11 +10,40 @@ import RouteResults from "../components/routes/RouteResults"
 import NearbyStops from "../components/stops/NearbyStops"
 
 import { useRouteStore } from "../store/routeStore"
+import { useLocationStore } from "../store/locationStore"
+
+import { getCurrentLocation } from "../services/geolocationService"
 
 function Home() {
   const destination = useRouteStore(
     (state) => state.destination,
   )
+
+  const setLocation = useLocationStore(
+    (state) => state.setLocation,
+  )
+
+  const setIsLocating = useLocationStore(
+    (state) => state.setIsLocating,
+  )
+
+  const setLocationError = useLocationStore(
+    (state) => state.setLocationError,
+  )
+
+  async function handleLocate() {
+    try {
+      setIsLocating(true)
+
+      const location = await getCurrentLocation()
+
+      setLocation(location)
+    } catch (error) {
+      setLocationError(error.message)
+    } finally {
+      setIsLocating(false)
+    }
+  }
 
   return (
     <main className="relative h-dvh w-full overflow-hidden bg-neutral-100 text-neutral-950">
@@ -70,6 +99,7 @@ function Home() {
       <div className="absolute bottom-[28%] right-4 z-20 flex flex-col gap-2 sm:bottom-32 sm:right-6">
 
         <button
+          onClick={handleLocate}
           className="flex h-11 w-11 items-center justify-center rounded-full bg-white shadow-md ring-1 ring-black/5 transition hover:scale-105"
           aria-label="Locate me"
         >
@@ -80,11 +110,13 @@ function Home() {
 
       {/* BOTTOM SHEET */}
 
-      {destination ? (
-        <RouteResults />
-      ) : (
-        <NearbyStops />
-      )}
+      <div className="absolute bottom-0 left-0 right-0 z-20">
+        {destination ? (
+          <RouteResults />
+        ) : (
+          <NearbyStops />
+        )}
+      </div>
 
     </main>
   )
